@@ -6,7 +6,7 @@ RUN apt-get install -y --no-install-recommends \
   libssl-dev \
 #  libcurl4-openssl-dev
 
-RUN install2.r -e shinydashboard \
+#RUN install2.r -e shinydashboard \
 # DBI \
 # RPostgreSQL \
 # jsonlite \
@@ -24,7 +24,7 @@ RUN install2.r -e shinydashboard \
 # lubridate \
 # shinyWidgets 
 
-COPY shinyReppuBu /srv/shiny-server/reppudashboard/
+#COPY shinyReppuBu /srv/shiny-server/reppudashboard/
 RUN chown -R shiny /srv/shiny-server/
 RUN chown -R shiny /var/lib/shiny-server/
 
