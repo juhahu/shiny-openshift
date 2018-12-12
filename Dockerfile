@@ -4,7 +4,7 @@ RUN apt-get install -y --no-install-recommends \
   libpq-dev \
   libxml2-dev \
   libssl-dev \
-  libcurl4-openssl-dev
+#  libcurl4-openssl-dev
 
 RUN install2.r -e shinydashboard \
 # DBI \
