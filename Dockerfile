@@ -7,8 +7,8 @@ RUN apt-get install -y --no-install-recommends \
   libssl-dev \
   libcurl4-openssl-dev
 
-RUN install2.r -e shinydashboard #\
-# DBI \
+RUN install2.r -e shinydashboard \
+  DBI #\
 # RPostgreSQL \
 # jsonlite \
 # dplyr \
