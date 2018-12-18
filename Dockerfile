@@ -1,5 +1,6 @@
 FROM rocker/shiny:latest
 
+RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
   libpq-dev \
   libxml2-dev \
