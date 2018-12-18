@@ -9,21 +9,21 @@ RUN apt-get install -y --no-install-recommends \
 
 RUN install2.r -e shinydashboard \
   DBI #\
-# RPostgreSQL \
-# jsonlite \
-# dplyr \
-# magrittr \
-# dbplyr \
-# stringr \
-# tidyr \
-# DT \
-# ggplot2 \
-# shinyjs \
-# scales \
-# plotly \
-# shinyBS \
-# lubridate \
-# shinyWidgets 
+  RPostgreSQL \
+  jsonlite \
+  dplyr \
+  magrittr \
+  dbplyr \
+  stringr \
+  tidyr \
+  DT \
+  ggplot2 \
+  shinyjs \
+  scales \
+  plotly \
+  shinyBS \
+  lubridate \
+  shinyWidgets 
 
 #COPY shinyReppuBu /srv/shiny-server/reppudashboard/
 #RUN chown -R shiny /srv/shiny-server/
