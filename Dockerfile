@@ -34,3 +34,4 @@ COPY shiny-server.sh /usr/bin/shiny-server.sh
 RUN chmod a+rx /usr/bin/shiny-server.sh
 RUN chown -R shiny /srv/shiny-server/
 RUN chown -R shiny /var/lib/shiny-server/
+
