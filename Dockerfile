@@ -26,7 +26,7 @@ RUN install2.r -e shinydashboard \
  lubridate \
  shinyWidgets 
 
-COPY shinyReppuBu /srv/shiny-server/reppudashboard/
+#COPY shinyReppuBu /srv/shiny-server/reppudashboard/
 COPY shiny-server.conf /etc/shiny-server/shiny-server.conf
 RUN chown -R shiny /srv/shiny-server/
 RUN chown -R shiny /var/lib/shiny-server/
