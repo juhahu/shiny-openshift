@@ -1,12 +1,12 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  app: shiny-server
-  template: shiny-server
+  app: shinyserver
+  template: shinyserver
 message: |-
   The following components have been scheduled for creation in your project: 
   Shiny server
-  << file-downloader >>
+  << file-downloader to be added later >>
 
 metadata:
   annotations:
@@ -22,7 +22,7 @@ metadata:
     openshift.io/provider-display-name: Juha Hulkkonen
     tags: r, shiny
     template.openshift.io/bindable: "false"
-  name: shiny-server
+  name: shinyserver
 
 objects:
 - apiVersion: "v1"
@@ -46,7 +46,7 @@ objects:
       targetPort: 3838
       name: ${NAME}-service
     selector:
-      app: shiny-server
+      app: shinyserver
 
 - apiVersion: v1
   kind: Route
@@ -56,7 +56,7 @@ objects:
       template.openshift.io/expose-uri: http://{.spec.host} #{.spec.path}
   spec:
     host: ${NAME}.${APPLICATION_DOMAIN_SUFFIX}
-    path: / #shiny-server"
+    path: / #shinyserver"
     to:
       kind: Service
       name: ${NAME}
@@ -82,8 +82,8 @@ objects:
         uri: ${SOURCE_REPOSITORY_URL}
         ref: ${SOURCE_REPOSITORY_REF}
       contextDir: ${CONTEXT_DIR}
-      sourceSecret:
-        name: ${GITSECRET}
+      #sourceSecret:
+      #  name: ${GITSECRET}
     strategy:
       dockerStrategy:
         buildArgs:
@@ -114,7 +114,7 @@ objects:
         imageChangeParams:
           automatic: true
           containerNames:
-            - shiny-server
+            - shinyserver
           from:
             kind: ImageStreamTag
             name: ${NAME}:latest
@@ -131,7 +131,7 @@ objects:
             persistentVolumeClaim:
               claimName: ${NAME}-pvc
         containers:
-          - name: shiny-server
+          - name: shinyserver
             image: ${NAME}:latest
             ports:
               - containerPort: 3838
@@ -163,13 +163,13 @@ parameters:
   displayName: Application Name
   name: NAME
   required: true
-  value: shiny-server
+  value: shinyserver
 
 - description: The OpenShift Namespace where the ImageStream resides
   displayName: Namespace
   name: NAMESPACE
   required: true
-  #value: 
+  value: testshiny
 
 - description: Maximum amount of memory the container can use
   displayName: Memory Limit
@@ -183,30 +183,30 @@ parameters:
   required: true
   value: https://github.com/juhahu/shiny-openshift.git
 
-#- description: GitLab username
-#  displayName: Username
-#  name: USERNAME
-#  required: true
-
 - description: Set this to a branch name, tag or other ref of your repository if you are not using the default branch
   displayName: Git Reference
   name: SOURCE_REPOSITORY_REF
-  #value: 
+  value: 
 
 - description: Set this to the relative path to your project if it is not in the root of your repository
   displayName: Context Directory
   name: CONTEXT_DIR
 
-- description: GitLab source secret name
-  displayName: Secret Name
-  name: GITSECRET
-  required: false
-  #value: gitlab
 
 - description: The exposed hostname suffix that will be used to create routes for app
   displayName: Application Hostname Suffix
   name: APPLICATION_DOMAIN_SUFFIX
   value: 
+
+#- description: GitHub username
+#  displayName: Username
+#  name: USERNAME
+#  required: true
+
+#- description: GitHub source secret name
+#  displayName: Secret Name
+#  name: GITSECRET
+#  value:
 
 #- description: Github trigger secret.  A difficult to guess string encoded as part of the webhook URL.  Not encrypted
 #  displayName: GitHub Webhook Secret
