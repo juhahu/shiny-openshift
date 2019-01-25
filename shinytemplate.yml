@@ -200,7 +200,7 @@ parameters:
 - description: GitLab source secret name
   displayName: Secret Name
   name: GITSECRET
-  required: true
+  required: false
   #value: gitlab
 
 - description: The exposed hostname suffix that will be used to create routes for app
