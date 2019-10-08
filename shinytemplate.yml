@@ -10,7 +10,8 @@ message: |-
 
 metadata:
   annotations:
-    description: Deploys R Shiny server
+    description: Deploys R Shiny server to OpenShift
+      Based on https://hub.docker.com/r/rocker/shiny Dockerfile
 
 
       WARNING- This deployment setup is still in the experimental stage.
@@ -46,17 +47,17 @@ objects:
       targetPort: 3838
       name: ${NAME}-service
     selector:
-      app: shinyserver
+      app: ${NAME}
 
 - apiVersion: v1
   kind: Route
   metadata:
     name: ${NAME}-route
     annotations:
-      template.openshift.io/expose-uri: http://{.spec.host} #{.spec.path}
+      template.openshift.io/expose-uri: http://{.spec.host}
   spec:
     host: ${NAME}.${APPLICATION_DOMAIN_SUFFIX}
-    path: / #shinyserver"
+    path: /
     to:
       kind: Service
       name: ${NAME}
@@ -82,8 +83,6 @@ objects:
         uri: ${SOURCE_REPOSITORY_URL}
         ref: ${SOURCE_REPOSITORY_REF}
       contextDir: ${CONTEXT_DIR}
-      #sourceSecret:
-      #  name: ${GITSECRET}
     strategy:
       dockerStrategy:
         buildArgs:
@@ -91,13 +90,11 @@ objects:
             value: shinyv1
     output:
       to:
-        namespace: ${NAMESPACE}
         kind: ImageStreamTag
         name: ${NAME}:latest
     triggers:
       - type: ImageChange
       - type: ConfigChange
-      #- type: GitHub
 ##
 - apiVersion: v1
   kind: DeploymentConfig
@@ -165,12 +162,6 @@ parameters:
   required: true
   value: shinyserver
 
-- description: The OpenShift Namespace where the ImageStream resides
-  displayName: Namespace
-  name: NAMESPACE
-  required: true
-  value: testshiny
-
 - description: Maximum amount of memory the container can use
   displayName: Memory Limit
   name: MEMORY_LIMIT
@@ -191,36 +182,9 @@ parameters:
 - description: Set this to the relative path to your project if it is not in the root of your repository
   displayName: Context Directory
   name: CONTEXT_DIR
-
+  value:
 
 - description: The exposed hostname suffix that will be used to create routes for app
   displayName: Application Hostname Suffix
   name: APPLICATION_DOMAIN_SUFFIX
-  value: 
-
-#- description: GitHub username
-#  displayName: Username
-#  name: USERNAME
-#  required: true
-
-#- description: GitHub source secret name
-#  displayName: Secret Name
-#  name: GITSECRET
-#  value:
-
-#- description: Github trigger secret.  A difficult to guess string encoded as part of the webhook URL.  Not encrypted
-#  displayName: GitHub Webhook Secret
-#  name: GITHUB_WEBHOOK_SECRET
-#  generate: expression
-#  from: [a-zA-Z0-9]{40}
-
-#- description: A secret string used to configure the Generic webhook
-#  displayName: Generic Webhook Secret
-#  name: GENERIC_WEBHOOK_SECRET
-#  generate: expression
-#  from: [a-zA-Z0-9]{40}
-
-
-
-
-
+  value: rahtiapp.fi

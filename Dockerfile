@@ -6,7 +6,8 @@ RUN apt-get install -y --no-install-recommends \
   libpq-dev \
   libxml2-dev \
   libssl-dev \
-  libcurl4-openssl-dev
+  libcurl4-openssl-dev \
+  nano
 
 RUN install2.r -e shinydashboard \
  DBI \
@@ -24,7 +25,8 @@ RUN install2.r -e shinydashboard \
  plotly \
  shinyBS \
  lubridate \
- shinyWidgets 
+ shinyWidgets \
+ causaleffect
 
 
 COPY shiny-server.conf /etc/shiny-server/shiny-server.conf
