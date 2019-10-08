@@ -1,3 +1,4 @@
+#!/bin/sh
 tempfile=$(mktemp)
 sed -e "s/^shiny.*//g" /etc/passwd > $tempfile
 cp $tempfile /etc/passwd
