@@ -10,17 +10,15 @@ message: |-
 
 metadata:
   annotations:
-    description: Deploys R Shiny server to OpenShift
+    description: |
+      Deploys R Shiny server to OpenShift
       Based on https://hub.docker.com/r/rocker/shiny Dockerfile
-
-
-      WARNING- This deployment setup is still in the experimental stage.
     iconClass: icon-other-linux
     openshift.io/display-name: R Shiny server
-    openshift.io/documentation-url: https://github.com/juhahu/shiny-openshift
+    openshift.io/documentation-url: https://github.com/CSCfi/shiny-openshift
     openshift.io/support-url: 
     openshift.io/long-description: TBA
-    openshift.io/provider-display-name: Juha Hulkkonen
+    openshift.io/provider-display-name: CSC
     tags: r, shiny
     template.openshift.io/bindable: "false"
   name: shinyserver
@@ -172,7 +170,7 @@ parameters:
   displayName: Git Repository URL
   name: SOURCE_REPOSITORY_URL
   required: true
-  value: https://github.com/juhahu/shiny-openshift.git
+  value: https://github.com/CSCfi/shiny-openshift.git
 
 - description: Set this to a branch name, tag or other ref of your repository if you are not using the default branch
   displayName: Git Reference
