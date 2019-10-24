@@ -6,8 +6,7 @@ labels:
 message: |-
   The following components have been scheduled for creation in your project: 
   Shiny server
-  << file-downloader to be added later >>
-
+  
 metadata:
   annotations:
     description: |
