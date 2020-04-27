@@ -25,8 +25,7 @@ RUN install2.r -e shinydashboard \
  plotly \
  shinyBS \
  lubridate \
- shinyWidgets \
- causaleffect
+ shinyWidgets
 
 
 COPY shiny-server.conf /etc/shiny-server/shiny-server.conf
